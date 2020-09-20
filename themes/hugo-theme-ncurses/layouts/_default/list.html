@@ -1,0 +1,23 @@
+{{ define "main" }}
+<main>
+  {{ partial "title.html" . }}
+  {{ .Content }}
+  {{ if not .Pages }}
+  {{ partial "empty.html" . }}
+  {{ else }}
+  <ul>
+    {{ range .Paginator.Pages }}
+    <li>
+      <a href="{{.RelPermalink}}">
+        {{ if .Date }}
+        [{{ .Date.Format "2006-01-02" }}]
+        {{ end }}
+        {{ .Title }}</a>
+    </li>
+    {{ end }}
+  </ul>
+  {{ end }}
+  {{ partial "pager.html" . }}
+</main>
+{{ end }}
+

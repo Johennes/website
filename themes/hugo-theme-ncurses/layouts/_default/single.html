@@ -1,0 +1,18 @@
+{{ define "main" }}
+<main>
+  {{ partial "title.html" . }}
+  <p class="meta">
+    {{ $date := .Date.Format "January 2, 2006" }}
+    {{ $lastmod := .Lastmod.Format "January 2, 2006" }}
+    {{ $date }}
+    {{ if not ( eq $lastmod $date ) }}
+    (last modified {{ $lastmod }})
+    {{ end }}
+    <br/>
+    {{ .WordCount }} words | {{ .ReadingTime }} minutes
+    <br/>
+    {{ partial "taxonomies.html" . }}
+  </p>
+  {{.Content}}
+</main>
+{{ end }}

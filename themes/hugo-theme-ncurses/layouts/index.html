@@ -1,0 +1,15 @@
+{{ define "main" }}
+<main>
+  {{ if .Title }}
+  <h1>{{.Title}}</h1>
+  {{ end }}
+  {{.Content}}
+  {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+  {{ if $pages}}
+  <h2>Latest posts</h2>
+  {{ range first 10 $pages.ByPublishDate.Reverse }}
+    {{ .Render "summary"}}
+  {{ end }}
+  {{ end }}
+</main>
+{{ end }}

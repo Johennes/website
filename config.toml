@@ -1,0 +1,16 @@
+baseURL = "file:///home/jm/Code/published/website/public/"
+languageCode = "en-us"
+title = "Hugo Ncurses"
+copyright = "Copyright 2020 Johannes Marbach"
+theme = "hugo-theme-ncurses"
+
+[params]
+  mainSections = ["posts"]
+
+[menu]
+	[[menu.main]]
+		identifier = "home"
+		name = "Home"
+		title = "?"
+		url = "/"
+		weight = 1

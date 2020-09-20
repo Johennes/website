@@ -1,0 +1,9 @@
+{{ if gt .Paginator.TotalPages 1 }}
+<footer class="pager">
+  <a {{ if .Paginator.HasPrev }}href="{{ .Paginator.First.URL }}"{{ end }}>&laquo;</a>
+  <a {{ if .Paginator.HasPrev }}href="{{ .Paginator.Prev.URL }}"{{ end }}>&lsaquo;</a>
+  Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}
+  <a {{ if .Paginator.HasNext }}href="{{ .Paginator.Next.URL }}"{{ end }}>&rsaquo;</a>
+  <a {{ if .Paginator.HasNext }}href="{{ .Paginator.Last.URL }}"{{ end }}>&raquo;</a>
+</footer>
+{{ end }}

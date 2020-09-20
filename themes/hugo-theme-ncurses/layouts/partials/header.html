@@ -1,0 +1,30 @@
+{{ if .Site.Menus.main }}
+{{ $currentPage := . }}
+<div class="window-content-container">
+  <nav class="menu-container">
+    <ul class="menu collapsed">
+      <li><a class="menu"><span class="bracket left">&lt;</span>&nbsp;<span class="menu-item-name">Menu</span>&nbsp;<span class="bracket right">&gt;</span></a></li>
+    </ul>
+    <ul class="menu column">
+      {{ range .Site.Menus.main.ByWeight }}<li>
+        <a class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}" href="{{ .URL }}">&lt;&nbsp;<span class="menu-item-name">{{ .Name }}</span>&nbsp;&gt;</a>
+      </li>{{ end }}
+    </ul>
+    <ul class="menu row">
+      {{ range .Site.Menus.main.ByWeight }}<li>
+        <a class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}" href="{{ .URL }}">&lt;&nbsp;<span class="menu-item-name">{{ .Name }}</span>&nbsp;&gt;</a>
+      </li>{{ end }}
+    </ul>
+    <ul class="menu full installed">
+      {{ range .Site.Menus.main.ByWeight }}<li>
+        <a class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}" href="{{ .URL }}">&lt;&nbsp;<span class="menu-item-name">{{ .Name }}</span>&nbsp;&gt;</a>
+      </li>{{ end }}
+    </ul>
+  </nav>
+</div>
+<script type="application/javascript" src="js/menu.js"></script>
+<div class="hrule">
+  <div class="border left top right horizontal light"></div>
+  <div class="border top right horizontal corner dark"></div>
+</div>
+{{ end }}

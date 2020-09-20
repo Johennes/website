@@ -1,0 +1,21 @@
+{{ define "main" }}
+<main>
+  {{ partial "title.html" . }}
+  {{ .Content }}
+  <ul>
+    {{ range .Paginator.Pages }}
+    <li>
+      <a href="{{.Permalink}}">[{{ .Date.Format "2006-01-02" }}] {{ .Title }}</a>
+    </li>
+    {{ end }}
+  </ul>
+  {{ partial "pager.html" . }}
+  <!-- {{ $path := printf "/%s" ( .Data.Plural | urlize ) }}
+  {{ with ( $.Site.GetPage ( $path ) ) }}
+  <p>
+    <a href="{{ .RelPermalink }}">All {{ .Data.Plural }}</a>
+  </p>
+  {{ end }} -->
+</main>
+{{ end }}
+

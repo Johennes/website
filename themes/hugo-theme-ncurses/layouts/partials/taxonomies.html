@@ -1,0 +1,10 @@
+{{ $page := . }}
+{{ range $name, $taxonomy := .Site.Taxonomies }}
+  {{ $terms := $page.GetTerms $name }}
+  {{ if $terms }}
+    {{ $name | humanize }}:
+    {{ range $terms }}
+      <a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+    {{ end }}
+  {{ end }}
+{{ end}}
