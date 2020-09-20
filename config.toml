@@ -1,4 +1,4 @@
-baseURL = "file:///home/jm/Code/published/website/public/"
+baseURL = "https://nosuchdomain.mooo.com/site/"
 languageCode = "en-us"
 title = "Hugo Ncurses"
 copyright = "Copyright 2020 Johannes Marbach"
