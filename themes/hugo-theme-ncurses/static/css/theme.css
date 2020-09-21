@@ -105,9 +105,16 @@ main * + ol, main * + ul {
 .window {
   position: relative;
   display: flex;
-  margin: calc(22em / 18) calc(2 * 22em / 18) calc(2 * 22em / 18) calc(22em / 18);
+  margin: calc(0.5 * 22em / 18) calc(22em / 18) calc(22em / 18) calc(0.5 * 22em / 18);
   background-color: #b5b6ae;
-  box-shadow: calc(22em / 18) calc(22em / 18) #000000;
+  box-shadow: calc(0.5 * 22em / 18) calc(0.5 * 22em / 18) #000000;
+}
+
+@media only screen and (min-width: 600px) {
+  .window {
+    margin: calc(22em / 18) calc(2 * 22em / 18) calc(2 * 22em / 18) calc(22em / 18);
+    box-shadow: calc(22em / 18) calc(22em / 18) #000000;
+  }
 }
 
 .window-border {
@@ -137,7 +144,13 @@ main * + ol, main * + ul {
 
 .window-content-container {
   position: relative;
-  padding: calc(22em / 18) calc(22em / 18);
+  padding: calc(0.5 * 22em / 18) calc(0.5 * 22em / 18);
+}
+
+@media only screen and (min-width: 600px) {
+  .window-content-container {
+    padding: calc(22em / 18) calc(22em / 18);
+  }
 }
 
 /* Borders */
@@ -193,6 +206,7 @@ main * + ol, main * + ul {
 nav.menu-container {
   position: relative;
   min-height: calc(22em / 18);
+  overflow: hidden;
 }
 
 ul.menu {
@@ -377,4 +391,5 @@ ul.menu a.active .menu-item-name::first-letter {
   width: 100%;
   color: #55ffff;
   text-align: center;
+  margin-bottom: env(safe-area-inset-bottom);
 }

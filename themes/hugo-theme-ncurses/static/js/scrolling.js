@@ -64,6 +64,8 @@ function handleScollIndicatorUpdates() {
     let body = document.body
     let scrollTop = doc.scrollTop || body.scrollTop
     let scrollHeight = doc.scrollHeight || body.scrollHeight
-    return Math.round(scrollTop / (scrollHeight - doc.clientHeight) * 100)
+    let height = scrollHeight - doc.clientHeight
+    let percentage = height > 0 ? Math.round(scrollTop / height * 100) : 0
+    return Math.max(0, Math.min(percentage, 100))
   }
 }
