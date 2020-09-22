@@ -344,13 +344,25 @@ ul.menu a.active .menu-item-name::first-letter {
 }
 
 .scrollable-sticky-background {
-  height: calc(22em / 18);
+  height: calc(22em / 18 - 0.5 * 2em / 18);
   width: calc(100% + 2em / 18);
   position: absolute;
-  top: calc(-0.5 * 22em / 18);
   left: 0;
   margin: 0 calc(-1em / 18);
   background-color: #b5b6ae;
+}
+
+.scrollable-sticky-background.top {
+  top: calc(-0.5 * 22em / 18 + 0.5 * 2em / 18);
+}
+
+.scrollable-sticky-background.bottom {
+  top: calc(-0.5 * 22em / 18 - 0.5 * 2em / 18);
+}
+
+.scrollable-sticky.is-sticky .scrollable-sticky-background {
+  height: calc(22em / 18);
+  top: calc(-0.5 * 22em / 18);
 }
 
 .scrollable-sticky-border {
@@ -373,6 +385,7 @@ ul.menu a.active .menu-item-name::first-letter {
   color: #55ff55;
   background-color: #b5b6ae;
   font-weight: bold;
+  visibility: hidden;
 }
 
 .scroll-indicator.up {
@@ -383,6 +396,10 @@ ul.menu a.active .menu-item-name::first-letter {
 .scroll-indicator.down {
   top: calc(-0.5 * 22em / 18);
   left: 0;
+}
+
+.scrollable-sticky.is-sticky .scroll-indicator {
+  visibility: visible;
 }
 
 /* Footer */
