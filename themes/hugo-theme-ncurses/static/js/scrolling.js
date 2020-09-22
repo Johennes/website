@@ -21,36 +21,28 @@ function handleScollIndicatorUpdates() {
     return
   }
 
+  const scrollUpObserver = new IntersectionObserver(([e]) => updateVisibility(e), {
+    rootMargin: '-1px 0px 0px 0px',
+    threshold: [1]
+  })
+
+  const scrollDownObserver = new IntersectionObserver( ([e]) => updateVisibility(e), {
+    rootMargin: '0px 0px -1px 0px',
+    threshold: [1]
+  })
+
   containers.forEach(container => {
     container.classList.add('sticky')
   })
 
-  let scrollUpIndicatorVisible = false
-  let scrollDownIndicatorVisible = false
+  scrollUpObserver.observe(scrollUpIndicator)
+  scrollDownObserver.observe(scrollDownIndicator)
 
-  updateScrollIndicatorVisibility()
-  window.addEventListener('scroll', updateScrollIndicatorVisibility)
-  window.addEventListener('resize', updateScrollIndicatorVisibility)
-
-  function updateScrollIndicatorVisibility() {
-    if (scrollDownIndicator.getBoundingClientRect().bottom === document.documentElement.clientHeight) {
-      if (!scrollDownIndicatorVisible) {
-        scrollDownIndicator.classList.remove('hidden')
-        scrollDownIndicatorVisible = true
-      }
-    } else if (scrollDownIndicatorVisible) {
-      scrollDownIndicator.classList.add('hidden')
-      scrollDownIndicatorVisible = false
-    }
-
-    if (scrollUpIndicator.getBoundingClientRect().top === 0) {
-      if (!scrollUpIndicatorVisible) {
-        scrollUpIndicator.classList.remove('hidden')
-        scrollUpIndicatorVisible = true
-      }
-    } else if (scrollUpIndicatorVisible) {
-      scrollUpIndicator.classList.add('hidden')
-      scrollUpIndicatorVisible = false
+  function updateVisibility(event) {
+    if (event.intersectionRatio < 1) {
+      event.target.classList.remove('hidden')
+    } else {
+      event.target.classList.add('hidden')
     }
   }
 }
