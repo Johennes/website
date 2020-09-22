@@ -6,7 +6,7 @@
       <li><a class="menu"><span class="bracket left">&lt;</span>&nbsp;<span class="menu-item-name">Menu</span>&nbsp;<span class="bracket right">&gt;</span></a></li>
     </ul>
     <ul class="menu column">
-      <li>&#xff0d;&#xff0d;&#xff0d;&#xff0d;&#xff0d;&#xff0d;</li>
+      <li>────────</li>
       {{ range .Site.Menus.main.ByWeight }}<li>
         <a class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}" href="{{ .URL }}">&lt;&nbsp;<span class="menu-item-name">{{ .Name }}</span>&nbsp;&gt;</a>
       </li>{{ end }}
