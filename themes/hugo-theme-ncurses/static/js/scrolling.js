@@ -33,9 +33,7 @@ function handleScollIndicatorUpdates() {
   window.addEventListener('resize', updateScrollIndicatorVisibility)
 
   function updateScrollIndicatorVisibility() {
-    let scrollPercentage = computeScrollPercentage()
-
-    if (scrollPercentage < 100) {
+    if (scrollDownIndicator.getBoundingClientRect().bottom === document.documentElement.clientHeight) {
       if (!scrollDownIndicatorVisible) {
         scrollDownIndicator.classList.remove('hidden')
         scrollDownIndicatorVisible = true
@@ -45,7 +43,7 @@ function handleScollIndicatorUpdates() {
       scrollDownIndicatorVisible = false
     }
 
-    if (scrollPercentage > 0) {
+    if (scrollUpIndicator.getBoundingClientRect().top === 0) {
       if (!scrollUpIndicatorVisible) {
         scrollUpIndicator.classList.remove('hidden')
         scrollUpIndicatorVisible = true
@@ -54,18 +52,5 @@ function handleScollIndicatorUpdates() {
       scrollUpIndicator.classList.add('hidden')
       scrollUpIndicatorVisible = false
     }
-    
-    scrollDownIndicator.innerHTML = `v(${scrollPercentage}%)`
-    scrollUpIndicator.innerHTML = `^(${100 - scrollPercentage}%)`
-  }
-
-  function computeScrollPercentage() {
-    let doc = document.documentElement
-    let body = document.body
-    let scrollTop = doc.scrollTop || body.scrollTop
-    let scrollHeight = doc.scrollHeight || body.scrollHeight
-    let height = scrollHeight - doc.clientHeight
-    let percentage = height > 0 ? Math.round(scrollTop / height * 100) : 0
-    return Math.max(0, Math.min(percentage, 100))
   }
 }
