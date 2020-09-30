@@ -69,6 +69,10 @@ a:not([href]) {
   margin-bottom: calc(22em / 18);
 }
 
+.summary + .summary {
+  margin-top: calc(22em / 18);
+}
+
 .summary .meta {
   margin-bottom: 0;
 }
