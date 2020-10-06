@@ -1,7 +1,7 @@
 ---
 title: "Passwordless Push to Gitea Without SSH"
 date: 2020-09-30
-lastmod: 2020-09-30
+lastmod: 2020-10-06
 draft: false
 tags: ["bash", "git", "gitea"]
 ---
@@ -23,25 +23,25 @@ $ cat ~/.bashrc_local
 export GITEA_ACCESS_TOKEN=...
 ```
 
-Using the access token I can now push to a repository via a dedicated URL without entering any credentials.
+Using the access token I can now update the remote URL.
 
 ```
-$ git push https://$GITEA_ACCESS_TOKEN@$mygit.foo/user/repo.git
+$ git remote set-url origin https://$GITEA_ACCESS_TOKEN@mygit.foo/user/repo.git
 ```
 
-That's already great but still quite a mouthful. Git aliases to the rescue!
+Afterwards, pushing won't ask for any credentials any more. Pretty neat! However, executing that lengthy command for every repository and whenever I'm changing my access token is a bit inconvenient. Luckily this can be simplified with a git alias.
 
 ```
 $ cat ~/.gitconfig 
 [alias]
-  psgt = !git push https://$GITEA_ACCESS_TOKEN@$(git config --get remote.origin.url | sed 's|https://||') $@
+  ugtr = !git remote set-url origin $(git config remote.origin.url | sed 's|://[^@]*@|://|' | sed \"s|://|://$GITEA_ACCESS_TOKEN@|\") $@
 ```
 
-Now whenever I invoke `git psgt` inside one of my repositories, it'll automatically use my access token to construct the correct remote URL and push to it without asking for my username and password. Rejoice!
+Running `git ugtr` (which is short for "update gitea remote") inside a repository will automatically update the remote URL and afterwards I can push without entering my password. Rejoice!
 
 ## Conclusion
 
-From a security point of view this isn't perfect but at least comparable to using SSH without a key phrase. An attacker gaining access to my computer account, could steal my access token just like they could steal my private SSH key. The fact that the access token is made part of the URL is not an issue because we're using HTTPS.
+From a security point of view this isn't perfect but at least comparable to using SSH without a key phrase. An attacker gaining access to my computer account, could steal my access token just like they could steal my private SSH key. The fact that the access token is made part of the URL is not an issue as long as you're using HTTPS.
 
 [revised their plans]: https://about.gitlab.com/blog/2019/10/10/update-free-software-and-telemetry/
 [Gitea]: https://gitea.io
